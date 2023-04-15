@@ -9,9 +9,29 @@
 </head>
 
 <body>
+    <script>
+        if ("geolocation" in navigator) {
+            console.log("geolocation available")
+            //this function does the geolocation
+            navigator.geolocation.getCurrentPosition((position) => {
+                const latitude = position.coords.latitude;
+                document.getElementById("latitude").textContent = latitude;
+                const longitude = position.coords.longitude;
+                document.getElementById("longitude").textContent = longitude;
+                console.log(position);
+                //console.log("latitude: ", position.coords.latitude);
+                //console.log("longitude: ", position.coords.longitude)
+            });
+        } else {
+            console.log("geolocation not available")
+        }
+
+    </script>
     <main>
         <h1>Hi Everyone!</h1>
         <h2>This is a test page for node.js</h2>
+        <p>latitude: <span id="latitude"></span><br>
+            longitude: <span id="longitude"></span></p>
     </main>
 </body>
 
