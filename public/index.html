@@ -13,7 +13,7 @@
         if ("geolocation" in navigator) {
             console.log("geolocation available")
             //this function does the geolocation
-            navigator.geolocation.getCurrentPosition((position) => {
+            navigator.geolocation.getCurrentPosition(async position => {
                 //this gets the longitude and latitude and displays it on the ids
                 const latitude = position.coords.latitude;
                 document.getElementById("latitude").textContent = latitude;
@@ -23,6 +23,7 @@
                 //console.log("latitude: ", position.coords.latitude);
                 //console.log("longitude: ", position.coords.longitude)
 
+                //this sends a JSON file to the server as a POST request
                 const data = { latitude, longitude }
                 const options = {
                     method: "POST",
@@ -31,9 +32,13 @@
                     },
                     body: JSON.stringify(data)
                 };
-                fetch("/api", options);
-
+                //this is where the server sends back to the client
+                const response = await fetch("/api", options);
+                const json = await response.json();
+                console.log(json);
             });
+
+
         } else {
             console.log("geolocation not available")
         }
