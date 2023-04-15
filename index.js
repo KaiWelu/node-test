@@ -6,3 +6,5 @@ const app = express();
 
 //this listens to a port and gives out a callback function
 app.listen(3000, () => console.log("--Hi, I'm listening at port 3000--"));
+//this serves as static file from the folder "public"
+app.use(express.static("public"));
